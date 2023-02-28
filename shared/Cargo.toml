@@ -1,0 +1,13 @@
+[package]
+name = "shared"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+log = "0.4.17"
+anyhow = "1.0.58"
+serde = { version = "1.0", features = ["derive"] }
+k8s-openapi = { version = "0.17.0", features = ["v1_24"] }
+names = { version = "0.14.0", default-features = false }
