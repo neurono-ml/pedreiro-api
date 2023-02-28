@@ -1,0 +1,18 @@
+@base = http://0.0.0.0:8080
+
+###
+GET {{base}}/health
+
+###
+POST {{base}}/jobs/?namespace=dev
+Content-Type: application/json
+
+{
+    "buildContext": "git://github.com/andreclaudino/rust-jobs-scrapper.git",
+    "dockerfilePath": "docker/Dockerfile",
+
+    "destinationImage": {
+        "repository": "registry.container-registry.svc:32000/rust-jobs-scrapper",
+        "tag": "test"
+    }  
+}

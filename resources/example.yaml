@@ -1,0 +1,8 @@
+name: build-test
+build_context: docker/
+dockerfile_path: Dockerfile
+
+destination_image:
+  repository: docker.io/andreclaudino/sample-csv-classifier
+  tag: test
+
