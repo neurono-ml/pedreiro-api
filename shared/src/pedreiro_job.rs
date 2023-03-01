@@ -3,7 +3,7 @@ use std::collections::{HashMap, BTreeMap};
 use k8s_openapi::api::core::v1::{EnvVar, ResourceRequirements, Affinity};
 use serde::{Serialize, Deserialize};
 
-use crate::{built_image::BuiltImage, helpers::dockerfile_path, pedreiro_image::PedreiroImage, pedreir_volume::PedreiroVolume};
+use crate::{built_image::BuiltImage, helpers::dockerfile_path, pedreiro_image::PedreiroImage, pedreiro_volume::PedreiroVolume};
 use super::helpers::generate_name;
 
 
@@ -62,6 +62,9 @@ pub struct PedreiroJob {
 
     /// startup command
     pub(crate) startup_command: Option<String>,
+
+    /// Cache layers
+    pub(crate) cache: Option<bool>,
 
     ///Volumes to be mounted
     #[serde(default)]

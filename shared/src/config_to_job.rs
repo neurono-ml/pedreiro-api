@@ -2,7 +2,7 @@ use std::collections::BTreeMap;
 
 use k8s_openapi::{api::{batch::v1::{Job, JobSpec}, core::v1::{PodTemplateSpec, PodSpec, Container, VolumeMount, Volume}}, apimachinery::pkg::apis::meta::v1::{ObjectMeta}};
 
-use crate::{PedreiroJob, constants::{JOB_NAME_ANNOTATION, JOB_TYPE_ANNOTATION, PEDREIRO_JOB_TYPE, RESTART_POLICY_NEVER, BUILD_ARG_FLAG, BUILD_CONTEXT_FLAG, DESTINATION_FLAG, DOCKERFILE_FLAG}, traits::ImageFullName, pedreir_volume::{PedreiroVolume}};
+use crate::{PedreiroJob, constants::{JOB_NAME_ANNOTATION, JOB_TYPE_ANNOTATION, PEDREIRO_JOB_TYPE, RESTART_POLICY_NEVER, BUILD_ARG_FLAG, BUILD_CONTEXT_FLAG, DESTINATION_FLAG, DOCKERFILE_FLAG, CACHE_FLAG}, traits::ImageFullName, pedreiro_volume::{PedreiroVolume}};
 
 
 impl PedreiroJob {
@@ -146,6 +146,11 @@ fn extract_main_container_arguments(config: &PedreiroJob) -> Vec<String> {
 
     build_arguments.push(DESTINATION_FLAG.to_owned());
     build_arguments.push(config.destination_image.full_name());
+
+    if config.cache.is_some() {
+        let cache_parameter = format!("{flag}={value}", flag=CACHE_FLAG.to_owned(), value=config.cache.unwrap().to_string());
+        build_arguments.push(cache_parameter);
+    }
 
     for (argument_name, argument_value) in config.build_arguments.iter() {
         let command_line_argument = format!("{argument_name}={argument_value}");

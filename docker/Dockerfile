@@ -10,11 +10,10 @@ ADD server /application/server
 ADD client /application/client
 ADD shared /application/shared
 
-RUN cargo test && \
-    cargo build --release && \
-    mkdir -p /application/bin && \
-    mv /application/target/release/server /application/bin/server && \
-    mv /application/target/release/pedreiro /application/bin/pedreiro
+RUN cargo test
+RUN cargo build --release
+RUN mkdir -p /application/bin
+RUN cp /application/target/release/server /application/target/release/pedreiro /application/bin/
 
 FROM docker.io/debian:buster-slim
 
