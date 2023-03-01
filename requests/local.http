@@ -1,18 +1,41 @@
 @base = http://0.0.0.0:8080
+@job_name = dreary-sink-3733
 
 ###
 GET {{base}}/health
 
 ###
-POST {{base}}/jobs/?namespace=dev
+POST {{base}}/jobs/
+    ?namespace=dev
 Content-Type: application/json
 
 {
-    "buildContext": "git://github.com/andreclaudino/rust-jobs-scrapper.git",
+    "buildContext": "git://github.com/neurono-ml/pedreiro-api.git",
     "dockerfilePath": "docker/Dockerfile",
+    "seconds_to_live_after_finished": 10,
+
+    "build_arguments": {
+        "GIT_REFERENCE": "wip",
+        "VERSION": "0.0.1-wip"
+    },
+
+    "volumes": [
+        {
+            "name": "docker-config",
+            "mountPath": "kaniko/.docker/",
+            "configMap": {
+                "name": "docker"
+            }
+        }
+    ],
 
     "destinationImage": {
-        "repository": "registry.container-registry.svc:32000/rust-jobs-scrapper",
+        "repository": "docker.io/andreclaudino/pedreiro-api",
         "tag": "test"
     }  
 }
+
+
+###
+GET {{base}}/jobs/watch/{{job_name}}
+    ?namespace=dev

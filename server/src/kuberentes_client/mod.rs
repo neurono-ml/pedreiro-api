@@ -1,3 +1,4 @@
+mod watch;
 mod create;
 pub struct K8sClient {
     client: kube::Client,

@@ -1,3 +1,5 @@
+mod entities;
+mod pedreir_volume;
 mod traits;
 pub mod pedreiro_image;
 mod constants;
@@ -7,3 +9,4 @@ mod built_image;
 mod pedreiro_job;
 
 pub use pedreiro_job::PedreiroJob;
+pub use entities::WatchMessage;

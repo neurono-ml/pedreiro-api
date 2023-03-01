@@ -3,7 +3,7 @@ use std::collections::{HashMap, BTreeMap};
 use k8s_openapi::api::core::v1::{EnvVar, ResourceRequirements, Affinity};
 use serde::{Serialize, Deserialize};
 
-use crate::{built_image::BuiltImage, helpers::dockerfile_path, pedreiro_image::PedreiroImage};
+use crate::{built_image::BuiltImage, helpers::dockerfile_path, pedreiro_image::PedreiroImage, pedreir_volume::PedreiroVolume};
 use super::helpers::generate_name;
 
 
@@ -39,10 +39,10 @@ pub struct PedreiroJob {
     pub(crate) restart_policy: Option<String>,
 
     /// Time before deleting pod after finished
-    pub(crate) ttl_seconds_after_finished: Option<u32>,
+    pub(crate) seconds_to_live_after_finished: Option<u32>,
 
     /// Maximum retries
-    pub(crate) backoff_limit: Option<u32>,
+    pub(crate) maximum_retries: Option<u32>,
 
     /// Maximum execution time for the job
     pub(crate) active_deadline_seconds: Option<u64>,
@@ -62,6 +62,10 @@ pub struct PedreiroJob {
 
     /// startup command
     pub(crate) startup_command: Option<String>,
+
+    ///Volumes to be mounted
+    #[serde(default)]
+    pub(crate) volumes: Vec<PedreiroVolume>
     
 }
 

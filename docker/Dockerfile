@@ -2,6 +2,9 @@ FROM docker.io/rust:1.66-slim-buster as builder
 
 WORKDIR /application
 
+RUN apt-get update && \
+    apt-get install -y libssl-dev
+
 ADD Cargo.toml /application/Cargo.toml
 ADD server /application/server
 ADD client /application/client
