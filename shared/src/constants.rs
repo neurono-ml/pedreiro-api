@@ -1,5 +1,5 @@
-pub(crate) const JOB_NAME_ANNOTATION: &str = "neurono.io/job-name";
-pub(crate) const JOB_TYPE_ANNOTATION: &str = "neurono.io/job-type";
+pub(crate) const JOB_NAME_ANNOTATION: &str = "neurono.ml/job-name";
+pub(crate) const JOB_TYPE_ANNOTATION: &str = "neurono.ml/job-type";
 
 pub(crate) const PEDREIRO_JOB_TYPE: &str = "pedreiro";
 
