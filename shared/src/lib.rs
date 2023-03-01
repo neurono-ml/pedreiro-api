@@ -1,5 +1,5 @@
 mod entities;
-mod pedreir_volume;
+mod pedreiro_volume;
 mod traits;
 pub mod pedreiro_image;
 mod constants;
